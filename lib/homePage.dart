@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/painting.dart';
 import 'package:health_and_doctor_appointment/bannerModel.dart';
 import 'package:health_and_doctor_appointment/cardModel.dart';
+import 'package:health_and_doctor_appointment/disease.dart';
 import 'package:health_and_doctor_appointment/doctorProfile.dart';
 import 'package:health_and_doctor_appointment/exploreList.dart';
 import 'package:health_and_doctor_appointment/firebaseAuth.dart';
@@ -16,6 +17,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'doctorsList.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -186,7 +189,7 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
                           alignment: Alignment.centerLeft,
-                          width: MediaQuery.of(context).size.width-40,
+                          width: MediaQuery.of(context).size.width - 40,
                           height: 140,
                           margin:
                               EdgeInsets.only(left: 0, right: 20, bottom: 20),
@@ -204,7 +207,17 @@ class _HomePageState extends State<HomePage> {
                             style: ButtonStyle(
                                 overlayColor: MaterialStateProperty.resolveWith(
                                     (states) => Colors.transparent)),
-                            onPressed: () {},
+                            onPressed: () {
+                              index == 0
+                                  ? Navigator.push(context, MaterialPageRoute(
+                                      builder: (BuildContext context) {
+                                      return Disease();
+                                    }))
+                                  : Navigator.push(context, MaterialPageRoute(
+                                      builder: (BuildContext context) {
+                                      return DoctorsList();
+                                    }));
+                            },
                             child: Stack(
                               children: [
                                 Image.asset(
